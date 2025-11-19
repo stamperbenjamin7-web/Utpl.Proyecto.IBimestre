@@ -7,8 +7,8 @@ from fastapi import FastAPI
 
 # Crear la instancia de FastAPI
 app = FastAPI(
-    title="API de Ejemplo UTPL",
-    description="API REST básica para aprender FastAPI",
+    title="API de Ejemplo UTPL - fdquinones@utpl.edu.ec",
+    description="API REST básica para aprender FastAPI en Interoperabilidad de Sistemas",
     version="1.0.0"
 )
 
