@@ -1,5 +1,5 @@
 # Utpl.Proyecto.IBimestre
-Repositorio base del proyecto de 1 primestre de Interoperabilidad
+Repositorio base del proyecto de 1 primestre de Interoperabilidad por Felipe Q. fdquinones@utpl.edu.ec
 
 ## Descripción
 Este proyecto contiene una API REST básica desarrollada con FastAPI para propósitos educativos. El objetivo es enseñar cómo trabajar con APIs REST utilizando Python y FastAPI.
