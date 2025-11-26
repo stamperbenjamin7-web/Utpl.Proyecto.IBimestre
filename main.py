@@ -83,3 +83,16 @@ def actualizar_persona(identificacion: str, persona_actualizada: Persona):
             return persona_actualizada
     raise HTTPException(status_code=404, detail="Persona no encontrada")
 
+
+@app.delete("/personas/{identificacion}", response_model=Persona, tags=["Personas"])
+def eliminar_persona(identificacion: str):
+    """Eliminar una persona por su identificación.
+
+    Retorna la persona eliminada o 404 si no existe.
+    """
+    for idx, persona in enumerate(dbPersona):
+        if persona.identificacion == identificacion:
+            # Remover y retornar la persona eliminada
+            return dbPersona.pop(idx)
+    raise HTTPException(status_code=404, detail="Persona no encontrada")
+
