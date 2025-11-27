@@ -1,5 +1,5 @@
 # Utpl.Proyecto.IBimestre
-Repositorio base del proyecto de 1 primestre de Interoperabilidad por Benjamin Stamper stamperbenjamin@gmail.com
+Repositorio base del proyecto de 1 primestre de Interoperabilidad por Benjamin Stamper stamperbenjamin7@gmail.com
 
 ## Descripción
 Este proyecto contiene una API REST básica desarrollada con FastAPI para propósitos educativos. El objetivo es enseñar cómo trabajar con APIs REST utilizando Python y FastAPI.
