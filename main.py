@@ -5,8 +5,16 @@ Este es un esqueleto de API para enseñar a estudiantes
 
 from fastapi import FastAPI, HTTPException
 from modelos.persona_dto import Persona
+from modelos.tour_dto import Tour
+
 
 dbPersona = []
+
+dbTours = [
+    Tour(id=1, nombre="Tour a Palm Beach", descripcion="Tour guiado por la famosa playa Palm Beach", precio=45.0, disponible=True),
+    Tour(id=2, nombre="Tour por Oranjestad", descripcion="Recorrido por la capital de Aruba", precio=30.0, disponible=True),
+    Tour(id=3, nombre="Safari en Jeep", descripcion="Aventura por el desierto de Aruba", precio=80.0, disponible=False),
+]
 
 # Crear la instancia de FastAPI
 app = FastAPI(
@@ -96,3 +104,46 @@ def eliminar_persona(identificacion: str):
             return dbPersona.pop(idx)
     raise HTTPException(status_code=404, detail="Persona no encontrada")
 
+# ======================================================
+#     ENDPOINTS DE TOURS DE ARUBA
+# ======================================================
+
+@app.get("/tours", response_model=list[Tour], tags=["Tours"])
+def obtener_tours():
+    return dbTours
+
+@app.get("/tours/{id_tour}", response_model=Tour, tags=["Tours"])
+def buscar_tour(id_tour: int):
+    for tour in dbTours:
+        if tour.id == id_tour:
+            return tour
+    raise HTTPException(status_code=404, detail="Tour no encontrado")
+
+@app.get("/tours/disponibles", response_model=list[Tour], tags=["Tours"])
+def tours_disponibles():
+    return [tour for tour in dbTours if tour.disponible]
+
+@app.post("/tours", response_model=Tour, tags=["Tours"])
+def crear_tour(tour: Tour):
+    dbTours.append(tour)
+    return tour
+
+@app.put("/tours/{id_tour}", response_model=Tour, tags=["Tours"])
+def actualizar_tour(id_tour: int, tour_actualizado: Tour):
+    if id_tour != tour_actualizado.id:
+        raise HTTPException(status_code=400, detail="El ID no coincide entre la ruta y el cuerpo")
+
+    for i, tour in enumerate(dbTours):
+        if tour.id == id_tour:
+            dbTours[i] = tour_actualizado
+            return tour_actualizado
+
+    raise HTTPException(status_code=404, detail="Tour no encontrado")
+
+@app.delete("/tours/{id_tour}", response_model=Tour, tags=["Tours"])
+def eliminar_tour(id_tour: int):
+    for i, tour in enumerate(dbTours):
+        if tour.id == id_tour:
+            return dbTours.pop(i)
+
+    raise HTTPException(status_code=404, detail="Tour no encontrado")

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field, model_validator
+from pydantic import BModel, EmailStr, Field, model_validator
 
 class Persona(BaseModel):
     nombre: str = Field(..., min_length=4, max_length=100, description="Nombre de la persona")
@@ -8,3 +8,5 @@ class Persona(BaseModel):
     direccion: str = Field(..., min_length=10, max_length=200, description="Dirección de la persona")
     telefono: str = Field(..., min_length=7, max_length=15, description="Número de teléfono de la persona")
     identificacion: str = Field(..., min_length=5, max_length=20, description="Identificación de la persona")
+
+    
