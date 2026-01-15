@@ -1,4 +1,4 @@
-from pydantic import BModel, EmailStr, Field, model_validator
+from pydantic import BaseModel, EmailStr, Field, model_validator
 
 class Persona(BaseModel):
     nombre: str = Field(..., min_length=4, max_length=100, description="Nombre de la persona")
