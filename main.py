@@ -6,9 +6,12 @@ Este es un esqueleto de API para enseñar a estudiantes
 from fastapi import FastAPI, HTTPException
 from modelos.persona_dto import Persona
 from modelos.tour_dto import Tour
+from db.supabase import create_supabase_client
 
 
 dbPersona = []
+# Crear el cliente de supabase
+supabase = create_supabase_client()
 
 dbTours = [
     Tour(id=1, nombre="Tour a Palm Beach", descripcion="Tour guiado por la famosa playa Palm Beach", precio=45.0, disponible=True),
@@ -64,7 +67,9 @@ def obtener_personas():
     """
     Endpoint para crear una nueva persona
     """
-    return dbPersona
+    data = supabase.table("personas").select("*").execute()
+
+    return data.data
 
 
 @app.get("/personas/{identificacion}", response_model=Persona, tags=["Personas"])
